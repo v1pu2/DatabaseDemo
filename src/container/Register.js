@@ -10,15 +10,17 @@ import {
 import {openDatabase} from 'react-native-sqlite-storage';
 import Mytextinput from '../component/Mytextinput';
 import Mybutton from '../component/Mybutton';
+import ViewUser from '../container/ViewList';
+
 var db = openDatabase({name: 'UserDatabase.db'});
 
-const RegisterUser = ({navigation}) => {
+const RegisterUser = (props) => {
   let [userName, setUserName] = useState('');
   let [userEmail, setUserEmail] = useState('');
   let [userContact, setUserContact] = useState('');
 
   let register_user = () => {
-    console.log(userName, userContact, userAddress);
+    console.log(userName, userEmail, userContact);
 
     if (!userName) {
       alert('Please fill name');
@@ -36,10 +38,10 @@ const RegisterUser = ({navigation}) => {
 
     db.transaction(function (tx) {
       tx.executeSql(
-        'INSERT INTO table_user (user_name, user_email,user_contact) VALUES (?,?,?)',
-        [userName, userContact, userAddress],
+        'INSERT INTO table_user (user_name, user_email, user_contact) VALUES (?,?,?)',
+        [userName, userEmail, userContact],
         (tx, results) => {
-          console.log('Results', results.rowsAffected);
+          console.log('Results', props);
           if (results.rowsAffected > 0) {
             Alert.alert(
               'Success',
@@ -47,7 +49,7 @@ const RegisterUser = ({navigation}) => {
               [
                 {
                   text: 'Ok',
-                  onPress: () => navigation.navigate('HomeScreen'),
+                  onPress: () => props.navigation.navigate('Home'),
                 },
               ],
               {cancelable: false},
@@ -85,6 +87,10 @@ const RegisterUser = ({navigation}) => {
               />
 
               <Mybutton title="Submit" customClick={register_user} />
+              <Mybutton
+                title="View All"
+                customClick={() => props.navigation.navigate('ViewList')}
+              />
             </KeyboardAvoidingView>
           </ScrollView>
         </View>

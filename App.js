@@ -5,7 +5,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {View, Text, StatusBar} from 'react-native';
 import SplashScreen from './src/container/SplashScreen';
 import Home from './src/container/Home';
-
+import ViewList from './src/container/ViewList';
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -20,7 +20,12 @@ const App = () => {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{headerShown: false}}
+          options={{headerShown: true}}
+        />
+        <Stack.Screen
+          name="ViewList"
+          component={ViewList}
+          options={{headerShown: true}}
         />
       </Stack.Navigator>
     </NavigationContainer>

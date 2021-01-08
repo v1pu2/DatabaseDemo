@@ -38,19 +38,18 @@ const Home = ({navigation}) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{flex: 1, backgroundColor: 'white'}}>
-        <Text style={styles.text}>
-          Example of SQLite Database in React Native
-        </Text>
-        <Register />
-      </View>
+      <Register navigation={navigation} />
     </SafeAreaView>
   );
 };
 
 export default Home;
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 10},
+  container: {
+    flex: 1,
+    padding: 10,
+    justifyContent: 'center',
+  },
   text: {
     fontSize: 18,
     textAlign: 'center',
