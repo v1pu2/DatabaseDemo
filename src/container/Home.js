@@ -12,6 +12,7 @@ import {
   TextInput,
 } from 'react-native';
 import {openDatabase} from 'react-native-sqlite-storage';
+import Register from './Register';
 
 var db = openDatabase({name: 'UserDatabase.db'});
 
@@ -26,7 +27,7 @@ const Home = ({navigation}) => {
           if (res.rows.length == 0) {
             txn.executeSql('DROP TABLE IF EXISTS table_user', []);
             txn.executeSql(
-              'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20), user_contact INT(10), user_address VARCHAR(255))',
+              'CREATE TABLE IF NOT EXISTS table_user(user_id INTEGER PRIMARY KEY AUTOINCREMENT, user_name VARCHAR(20), user_email VARCHAR(40),user_contact INT(10))',
               [],
             );
           }
@@ -36,17 +37,12 @@ const Home = ({navigation}) => {
   }, []);
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.container}>
       <View style={{flex: 1, backgroundColor: 'white'}}>
-        {/* <View style={{flex: 1}}>
-          <Mybutton
-            title="Register"
-            customClick={() => navigation.navigate('Register')}
-          />
-        </View> */}
         <Text style={styles.text}>
           Example of SQLite Database in React Native
         </Text>
+        <Register />
       </View>
     </SafeAreaView>
   );
@@ -54,6 +50,7 @@ const Home = ({navigation}) => {
 
 export default Home;
 const styles = StyleSheet.create({
+  container: {flex: 1, padding: 10},
   text: {
     fontSize: 18,
     textAlign: 'center',
