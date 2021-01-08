@@ -37,8 +37,11 @@ const ViewAllUser = () => {
         <Text>Name: {item.user_name}</Text>
         <Text>Email: {item.user_email}</Text>
         <Text>Contact: {item.user_contact}</Text>
+        <Text>Teacher Name: {item && item.teacher}</Text>
+        <Text>Subject: {item && item.subject}</Text>
       </View>
     );
+
   };
 
   return (
@@ -52,14 +55,6 @@ const ViewAllUser = () => {
             renderItem={({item}) => listItemView(item)}
           />
         </View>
-        <Text
-          style={{
-            fontSize: 18,
-            textAlign: 'center',
-            color: 'grey',
-          }}>
-          Example of SQLite Database in React Native
-        </Text>
       </View>
     </SafeAreaView>
   );
